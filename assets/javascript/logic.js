@@ -3,9 +3,9 @@
 // (Ex. 3.0 != 3.7.0)
 
 var config = {
-  apiKey: "AIzaSyABvOqZn2VvVKKzhaVAiDAVheWtNoP_ANc",
-  authDomain: "a-first-project-382f3.firebaseio.com",
-  databaseURL: "https://a-first-project-382f3.firebaseio.com/"
+  apiKey: "AIzaSyBJYLKQ6ESPfPPnaSvQktFoWBfReqN-NAc",
+  authDomain: "hello-world-project-18d8c.firebaseio.com",
+  databaseURL: "https://hello-world-project-18d8c.firebaseio.com/"
 };
 
 firebase.initializeApp(config);
