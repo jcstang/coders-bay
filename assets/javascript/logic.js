@@ -5,10 +5,12 @@
 var config = {
   apiKey: "AIzaSyBJYLKQ6ESPfPPnaSvQktFoWBfReqN-NAc",
   authDomain: "hello-world-project-18d8c.firebaseio.com",
-  databaseURL: "https://hello-world-project-18d8c.firebaseio.com/"
+  databaseURL: "https://hello-world-project-18d8c.firebaseio.com/",
+  projectId: "hello-world-project-18d8c"
 };
 
 firebase.initializeApp(config);
+console.log(firebase);
 
 // Assign the reference to the database to a variable named 'database'
 // var database = ...
