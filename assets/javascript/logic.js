@@ -53,7 +53,7 @@ database.ref().on("value", function (snapshot) {
 
 
   }
-  
+
   displayCurrentHighBid();
 
   // If any errors are experienced, log them to console.
@@ -78,7 +78,13 @@ $("#submit-bid").on("click", function (event) {
   if (bidderPrice > highPrice) {
 
     // Alert
-    alert("You are now the highest bidder.");
+    // alert("You are now the highest bidder.");
+    var successMessage = $('<div>').addClass('alert alert-success')
+      .attr('role', 'alert')
+      .text('Success - YOU are the highest bidder.');
+    $('.card-message').prepend(successMessage);
+
+
 
     // Save the new price in Firebase
     database.ref().set({
@@ -105,7 +111,16 @@ $("#submit-bid").on("click", function (event) {
 
   else {
     // Alert
-    alert("Sorry that bid is too low. Try again.");
+    // alert("Sorry that bid is too low. Try again.");
+
+    var tooLowMessage = $('<div>').addClass('alert alert-warning')
+      .attr('role', 'alert')
+      .text('Ouch - Sorry that bid is too low.');
+    $('.card-message').prepend(tooLowMessage);
+    setTimeout(function() {
+      $('.card-message').detach();
+    }, 5 * 1000);
+
   }
 
 });
