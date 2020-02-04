@@ -10,11 +10,6 @@ var config = {
 };
 
 firebase.initializeApp(config);
-console.log(firebase);
-
-// Assign the reference to the database to a variable named 'database'
-// var database = ...
-
 var database = firebase.database();
 
 // Initial Values
@@ -23,14 +18,15 @@ var initialBidder = "No one :-(";
 var highPrice = initialBid;
 var highBidder = initialBidder;
 
-// --------------------------------------------------------------
-
-// At the initial load and subsequent value changes, get a snapshot of the stored data.
-// This function allows you to update your page in real-time when the firebase database changes.
 function displayCurrentHighBid() {
   $('#highest-bidder').text(highBidder);
   $('#highest-price').text(highPrice);
 }
+
+
+// --------------------------------------------------------------
+// At the initial load and subsequent value changes, get a snapshot of the stored data.
+// This function allows you to update your page in real-time when the firebase database changes.
 
 database.ref().on("value", function (snapshot) {
   // If Firebase has a highPrice and highBidder stored (first case)
@@ -42,27 +38,19 @@ database.ref().on("value", function (snapshot) {
 
     console.log(highPrice, highBidder);
 
-
   }
 
-  // Else Firebase doesn't have a highPrice/highBidder, so use the initial local values.
-  else {
-    console.log(highPrice, highBidder);
-    // Change the HTML to reflect the initial values
-
-
-
-  }
-
+  // display current high bid
   displayCurrentHighBid();
 
-  // If any errors are experienced, log them to console.
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
 });
 
-// --------------------------------------------------------------
 
+// ===================================================
+// on click event 
+// ===================================================
 // Whenever a user clicks the submit-bid button
 $("#submit-bid").on("click", function (event) {
   // Prevent form from submitting
@@ -83,8 +71,9 @@ $("#submit-bid").on("click", function (event) {
       .attr('role', 'alert')
       .text('Success - YOU are the highest bidder.');
     $('.card-message').prepend(successMessage);
-
-
+    setTimeout(function() {
+      $('.card-message').detach();
+    }, 5 * 1000);
 
     // Save the new price in Firebase
     database.ref().set({
@@ -97,19 +86,7 @@ $("#submit-bid").on("click", function (event) {
       highBidder: bidderName
     });
 
-    // Log the new High Price
-
-
-    // Store the new high price and bidder name as a local variable
-    // highPrice = bidderPrice;
-    // highBidder = bidderName;
-
-    // // Change the HTML to reflect the new high price and bidder
-    // $('#highest-bidder').text(highBidder);
-    // $('#highest-price').text(highPrice);
-  }
-
-  else {
+  } else {
     // Alert
     // alert("Sorry that bid is too low. Try again.");
 
